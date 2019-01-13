@@ -1,28 +1,100 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, createRef } from "react";
+import Textarea from "./Textarea";
+import Card from "./Card";
+import omit from "lodash/omit";
 
-class App extends Component {
+import styled from "styled-components";
+
+const Button = styled.button`
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+const Cards = styled.div`
+  padding: 1rem;
+
+  display: grid;
+  /* grid: auto-flow / minmax(); */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  background-color: #ddd;
+`;
+
+export default class App extends Component {
+  textRef = createRef();
+
+  state = {
+    scheduleObj: {}
+  };
+
+  componentDidMount() {
+    const localData = this.getLocal();
+
+    if (localData) {
+      this.setState({ scheduleObj: { ...localData } });
+    }
+  }
+
+  saveLocal = obj => {
+    const data = JSON.stringify(obj);
+
+    localStorage.setItem("Week", data);
+  };
+
+  getLocal = () => {
+    const data = localStorage.getItem("Week");
+    return data ? JSON.parse(data) : [];
+  };
+
+  delCard = num => {
+    const newObj = omit(this.state.scheduleObj, num);
+
+    this.saveLocal(newObj);
+    this.setState({
+      scheduleObj: newObj
+    });
+  };
+
+  insertText = () => {
+    this.textRef.current.insertText();
+  };
+
+  getText = e => {
+    e.preventDefault();
+    const textObj = { ...this.textRef.current.getText() };
+    const newState = { ...this.state.scheduleObj, ...textObj };
+
+    this.setState({
+      scheduleObj: newState
+    });
+    this.saveLocal(newState);
+  };
+
   render() {
+    const { scheduleObj } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <h1>Schedule Parser</h1>
+        <Button onClick={this.insertText}>Insert Text</Button>
+        <Textarea ref={this.textRef} />
+        <Button onClick={this.getText} type="submit">
+          Click
+        </Button>
+        <Cards>
+          {Object.keys(scheduleObj).map(item => {
+            return (
+              <Card
+                delCard={this.delCard}
+                key={item}
+                id={item}
+                info={scheduleObj[item]}
+              />
+            );
+          })}
+        </Cards>
       </div>
     );
   }
 }
-
-export default App;

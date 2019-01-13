@@ -1,0 +1,81 @@
+			User schedule for 7 Jan 2019 through to 13 Jan 2019 is shown below
+
+		Mon 7 Jan
+		-----------
+
+						 Start: 07:30
+
+							 End: 17:00
+
+						 Total: 09:30
+
+						Breaks: 01:00
+
+							 Pay: 08:30
+
+							Role: Distribution Centre (SWMP)\Admin\Driver DC
+
+		Tue 8 Jan
+		-----------
+
+						 Start: 08:30
+
+							 End: 17:30
+
+						 Total: 09:00
+
+						Breaks: 01:00
+
+							 Pay: 08:00
+
+							Role: Distribution Centre (SWMP)\Admin\Driver DC
+
+		Wed 9 Jan
+		-----------
+
+						 Start: 08:30
+
+							 End: 17:00
+
+						 Total: 08:30
+
+						Breaks: 01:00
+
+							 Pay: 07:30
+
+							Role: Distribution Centre (SWMP)\Admin\Driver DC
+
+		Thu 10 Jan
+		-----------
+
+						 Start: 08:30
+
+							 End: 12:00
+
+						 Total: 03:30
+
+						Breaks: 00:00
+
+							 Pay: 03:30
+
+							Role: Distribution Centre (SWMP)\Admin\Driver DC
+
+		Fri 11 Jan
+		-----------
+
+						 Start: 08:30
+
+							 End: 17:00
+
+						 Total: 08:30
+
+						Breaks: 01:00
+
+							 Pay: 07:30
+
+							Role: Distribution Centre (SWMP)\Admin\Driver DC
+
+		Rostered hours are flexible and can change without notice depending on the needs of the business.   Please note that the break times shown above are indicative only.  You will need to confirm your break time with the manager/acting manager on the day.
+
+
+		DoNotReply@riteq.com.au
