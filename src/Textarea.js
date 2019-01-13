@@ -5,9 +5,9 @@ export default class Textarea extends Component {
   textRef = createRef();
 
   setClock = (date, time) => {
-    // console.log("date: ", date);
+    //
     const parsedTime = time.split(":");
-    // console.log("parsedTime: ", parsedTime);
+    //
     return date.add(parsedTime[0], "h").add(parsedTime[1], "m");
   };
 
@@ -100,7 +100,9 @@ export default class Textarea extends Component {
   };
   getText = () => {
     const text = this.textRef.current.value;
+
     const arr = text
+      .toLowerCase()
       .split("\n")
       .map(item => item.trim())
       .filter(item => item !== "");
@@ -119,36 +121,20 @@ export default class Textarea extends Component {
       .filter(item => dateReg.test(item))
       .map(item => moment(item, "ddd D MMM").format("YYYY-MM-DD"));
 
+    // const weekNum = moment(dates[1], "YYYY-MM-DD").format("W");
     dates.shift();
-    // console.log("times: ", times);
 
-    // for (let i = 0, j = 0; i < times.length; i += 5, j++) {
-    //   result.push({
-    //     Date: dates[j],
-    //     [times[i][0]]: times[i][1],
-    //     // [times[i][0]]: this.setClock(dates[j], times[i][1]),
-    //     [times[i + 1][0]]: times[i + 1][1],
-    //     // [times[i + 1][0]]: this.setClock(dates[j], times[i + 1][1]),
-    //     [times[i + 2][0]]: times[i + 2][1],
-    //     // [times[i + 2][0]]: this.setClock(dates[j], times[i + 2][1]),
-    //     [times[i + 3][0]]: times[i + 3][1],
-    //     // [times[i + 3][0]]: this.setClock(dates[j], times[i + 3][1]),
-    //     [times[i + 4][0]]: times[i + 4][1]
-    //     // [times[i + 4][0]]: this.setClock(dates[j], times[i + 4][1])
-    //   });
-    // }
     for (let i = 0, j = 0; i < times.length; i += 5, j++) {
       result[dates[j]] = {
-        Date: dates[j],
+        date: dates[j],
         [times[i][0]]: times[i][1],
         [times[i + 1][0]]: times[i + 1][1],
         [times[i + 2][0]]: times[i + 2][1],
         [times[i + 3][0]]: times[i + 3][1],
-        [times[i + 4][0]]: times[i + 4][1]
+        [times[i + 4][0]]: times[i + 4][1],
+        week: moment(dates[j], "YYYY-MM-DD").format("WW")
       };
     }
-
-    console.log("result: ", result);
 
     return result;
   };

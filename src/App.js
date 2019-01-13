@@ -1,16 +1,19 @@
 import React, { Component, createRef } from "react";
+import omit from "lodash/omit";
+import styled from "styled-components";
+
 import Textarea from "./Textarea";
 import Card from "./Card";
-import omit from "lodash/omit";
+import SummaryCard from "./SummaryCard";
 
-import styled from "styled-components";
+import "./app.css";
 
 const Button = styled.button`
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
+  /* border: 2px solid palevioletred; */
+  border-radius: 5px;
 `;
 const Cards = styled.div`
   padding: 1rem;
@@ -77,7 +80,7 @@ export default class App extends Component {
     return (
       <div>
         <h1>Schedule Parser</h1>
-        <Button onClick={this.insertText}>Insert Text</Button>
+        {/* <Button onClick={this.insertText}>Insert Text</Button> */}
         <Textarea ref={this.textRef} />
         <Button onClick={this.getText} type="submit">
           Click
@@ -94,6 +97,8 @@ export default class App extends Component {
             );
           })}
         </Cards>
+        <h1>Summary</h1>
+        <SummaryCard info={scheduleObj} />
       </div>
     );
   }
