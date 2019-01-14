@@ -16,13 +16,11 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 const Cards = styled.div`
-  padding: 1rem;
+  /* padding: 1rem; */
 
   display: grid;
-  /* grid: auto-flow / minmax(); */
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
-  background-color: #ddd;
 `;
 
 export default class App extends Component {
@@ -75,29 +73,60 @@ export default class App extends Component {
     this.saveLocal(newState);
   };
 
+  toggleCards = e => {
+    const cards = document.querySelector(".content");
+
+    // const display = cards.style.display;
+
+    // display === "none"
+    //   ? (cards.style.display = "grid")
+    //   : (cards.style.display = "none");
+
+    // const content = this.nextElementSibling;
+    const height = cards.style.maxHeight;
+    console.log("cards.style: ", cards.style);
+
+    console.log("height: ", height);
+    height === ""
+      ? (cards.style.maxHeight = `${cards.scrollHeight}px`)
+      : //  (cards.style.maxHeight = `500px`)
+        (cards.style.maxHeight = "");
+  };
+
   render() {
     const { scheduleObj } = this.state;
     return (
       <div>
-        <h1>Schedule Parser</h1>
-        {/* <Button onClick={this.insertText}>Insert Text</Button> */}
-        <Textarea ref={this.textRef} />
-        <Button onClick={this.getText} type="submit">
-          Click
-        </Button>
-        <Cards>
-          {Object.keys(scheduleObj).map(item => {
-            return (
-              <Card
-                delCard={this.delCard}
-                key={item}
-                id={item}
-                info={scheduleObj[item]}
-              />
-            );
-          })}
-        </Cards>
-        <h1>Summary</h1>
+        <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
+          Schedule Parser
+        </h1>
+        <div className="header">
+          {/* <Button onClick={this.insertText}>Insert Text</Button> */}
+          <Textarea ref={this.textRef} />
+          <Button onClick={this.getText}>Run</Button>
+        </div>
+        <div className="cards">
+          <h2>
+            Schedule Cards
+            <span>
+              <button onClick={this.toggleCards}>+</button>
+            </span>
+          </h2>
+
+          <Cards className="content">
+            {Object.keys(scheduleObj).map(item => {
+              return (
+                <Card
+                  delCard={this.delCard}
+                  key={item}
+                  id={item}
+                  info={scheduleObj[item]}
+                />
+              );
+            })}
+          </Cards>
+        </div>
+
         <SummaryCard info={scheduleObj} />
       </div>
     );

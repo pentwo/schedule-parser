@@ -5,11 +5,12 @@ import styled from "styled-components";
 
 const Container = styled.div`
   /* font-size: 1.5rem; */
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   border: 2px solid #111;
+  background-color: #eee;
 
   label {
     text-transform: capitalize;
@@ -17,8 +18,9 @@ const Container = styled.div`
   button {
     border: 0;
     background-color: rgba(0, 0, 0, 0);
-    text-align: right;
     grid-column: span 2;
+    cursor: pointer;
+    justify-self: end;
   }
   span {
     text-align: center;
@@ -42,6 +44,10 @@ const Container = styled.div`
     grid-template-columns: 1fr;
     grid-column: span 2;
     text-align: center;
+  }
+
+  .digi {
+    font-size: 2rem;
   }
 `;
 
@@ -70,17 +76,17 @@ export class Card extends Component {
             ❌
           </span>
         </button>
-        <h3 className="cardTitle">{date}</h3>
+        <h2 className="cardTitle">{date}</h2>
         <div className="start">
-          <label>Start</label>
-          {start}
+          <label>Start </label>
+          <span className="digi">{start}</span>
         </div>
         <span role="img" aria-label="arrow-down">
           ⬇️
         </span>
         <div className="end">
           <label>End</label>
-          {end}
+          <span className="digi">{end}</span>
         </div>
       </Container>
     );

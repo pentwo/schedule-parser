@@ -3,6 +3,8 @@ import uniq from "lodash/uniq";
 import styled from "styled-components";
 
 const Container = styled.div`
+  padding: 1rem;
+
   background-color: #111;
 `;
 
@@ -32,6 +34,7 @@ export class SummaryCard extends Component {
 
     return (
       <Container>
+        <h1>Summary</h1>
         {weeks.map(week => {
           return (
             <div key={week}>
