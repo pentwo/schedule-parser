@@ -10,7 +10,7 @@ body {
   /* margin: 0; */
   font-family: "Open Sans", sans-serif;
   color: #424242;
-  overflow: hidden;
+  /* overflow: hidden; */
   background: #bbb;
   box-sizing: border-box;
 }

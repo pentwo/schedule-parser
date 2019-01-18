@@ -10,7 +10,13 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   border: 2px solid #111;
+  border-radius: 10px;
   background-color: #eee;
+
+  &:hover {
+    /* background: lightgray; */
+    box-shadow: 3px 3px 5px #111;
+  }
 
   label {
     text-transform: capitalize;
@@ -49,6 +55,15 @@ const Container = styled.div`
   .digi {
     font-size: 2rem;
   }
+  .today {
+    background-color: red;
+  }
+
+  .etc {
+    font-size: 0.8rem;
+    grid-column: span 2;
+    text-align: center;
+  }
 `;
 
 export class Card extends Component {
@@ -63,7 +78,7 @@ export class Card extends Component {
 
     // console.log("day: ", day);
     return (
-      <Container>
+      <Container className={this.props.checkToday}>
         {/* {Object.keys(day).map(d => {
           return (
             <div className={d} key={d}>
@@ -87,6 +102,11 @@ export class Card extends Component {
         <div className="end">
           <label>End</label>
           <span className="digi">{end}</span>
+        </div>
+        <div className="etc">
+          <span>
+            Breaks: {breaks} Hours: {pay}
+          </span>
         </div>
       </Container>
     );

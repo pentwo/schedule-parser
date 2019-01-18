@@ -1,12 +1,5 @@
 import React, { Component } from "react";
 import uniq from "lodash/uniq";
-import styled from "styled-components";
-
-const Container = styled.div`
-  padding: 1rem;
-
-  background-color: #111;
-`;
 
 export class SummaryCard extends Component {
   calHours = week => {
@@ -31,10 +24,12 @@ export class SummaryCard extends Component {
   render() {
     const obj = this.props.info;
     const weeks = uniq(Object.keys(obj).map(key => obj[key].week));
+    const hours = Object.keys(obj).map(key => obj[key].total);
+    console.log("hours: ", hours);
+    // console.log("this.calHours(weeks): ", this.calHours(weeks));
 
     return (
-      <Container>
-        <h1>Summary</h1>
+      <React.Fragment>
         {weeks.map(week => {
           return (
             <div key={week}>
@@ -43,7 +38,7 @@ export class SummaryCard extends Component {
             </div>
           );
         })}
-      </Container>
+      </React.Fragment>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component, createRef } from "react";
 import omit from "lodash/omit";
 import styled from "styled-components";
+import moment from "moment";
 
 import Textarea from "./Textarea";
 import Card from "./Card";
@@ -12,16 +13,15 @@ const Button = styled.button`
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  /* border: 2px solid palevioletred; */
   border-radius: 5px;
 `;
-const Cards = styled.div`
-  /* padding: 1rem; */
+// const Cards = styled.div`
+//   /* padding: 1rem; */
 
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-`;
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+//   gap: 1rem;
+// `;
 
 export default class App extends Component {
   textRef = createRef();
@@ -73,8 +73,10 @@ export default class App extends Component {
     this.saveLocal(newState);
   };
 
-  toggleCards = e => {
-    const cards = document.querySelector(".content");
+  toggleNextSib = e => {
+    // const cards = document.querySelector(".content");
+    const toggleTarget = e.currentTarget.nextSibling;
+    // console.log("e.currentTarget: ", e.currentTarget.nextSibling);
 
     // const display = cards.style.display;
 
@@ -83,37 +85,54 @@ export default class App extends Component {
     //   : (cards.style.display = "none");
 
     // const content = this.nextElementSibling;
-    const height = cards.style.maxHeight;
-    console.log("cards.style: ", cards.style);
 
-    console.log("height: ", height);
+    // const height = cards.style.maxHeight;
+
+    // height === ""
+    //   ? (cards.style.maxHeight = `${cards.scrollHeight}px`)
+    //   : //  (cards.style.maxHeight = `500px`)
+    //     (cards.style.maxHeight = "");
+
+    const height = toggleTarget.style.maxHeight;
+
     height === ""
-      ? (cards.style.maxHeight = `${cards.scrollHeight}px`)
-      : //  (cards.style.maxHeight = `500px`)
-        (cards.style.maxHeight = "");
+      ? (toggleTarget.style.maxHeight = `${toggleTarget.scrollHeight}px`)
+      : //  (toggleTarget.style.maxHeight = `500px`)
+        (toggleTarget.style.maxHeight = "");
   };
 
   render() {
     const { scheduleObj } = this.state;
+
+    const today = moment().format("YYYY-MM-DD");
+    // console.log("today: ", today);
+
     return (
       <div>
+        {/* Header */}
         <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
           Schedule Parser
         </h1>
-        <div className="header">
+
+        <div className="parser">
+          <h2 onClick={this.toggleNextSib}>Schedule Parser</h2>
           {/* <Button onClick={this.insertText}>Insert Text</Button> */}
-          <Textarea ref={this.textRef} />
-          <Button onClick={this.getText}>Run</Button>
+          <div className="form">
+            <Textarea ref={this.textRef} />
+            <Button onClick={this.getText}>Run</Button>
+          </div>
         </div>
+
+        {/* Cards */}
         <div className="cards">
-          <h2>
+          <h2 onClick={this.toggleNextSib}>
             Schedule Cards
-            <span>
+            {/* <span>
               <button onClick={this.toggleCards}>+</button>
-            </span>
+            </span> */}
           </h2>
 
-          <Cards className="content">
+          <div className="content">
             {Object.keys(scheduleObj).map(item => {
               return (
                 <Card
@@ -121,13 +140,23 @@ export default class App extends Component {
                   key={item}
                   id={item}
                   info={scheduleObj[item]}
+                  // today={moment().format("YYYY-MM-DD")}
+                  checkToday={item === today ? "today" : ""}
+                  // className="today"
                 />
               );
             })}
-          </Cards>
+          </div>
         </div>
 
-        <SummaryCard info={scheduleObj} />
+        {/* Summary */}
+
+        <div className="summary">
+          <h2 onClick={this.toggleNextSib}>Summary</h2>
+          <div className="summaryCard">
+            <SummaryCard info={scheduleObj} />
+          </div>
+        </div>
       </div>
     );
   }
