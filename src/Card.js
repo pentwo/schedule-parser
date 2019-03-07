@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import styled from "styled-components";
 
 // import moment from "moment";
@@ -44,6 +44,7 @@ const Container = styled.div`
   .total,
   .breaks,
   .pay,
+  .runs,
   .week {
     margin: 0.5rem;
     display: grid;
@@ -55,9 +56,6 @@ const Container = styled.div`
   .digi {
     font-size: 2rem;
   }
-  .today {
-    background-color: red;
-  }
 
   .etc {
     font-size: 0.8rem;
@@ -67,25 +65,31 @@ const Container = styled.div`
 `;
 
 export class Card extends Component {
+  radioRef = createRef();
+
   delCard = () => {
     this.props.delCard(this.props.id);
+  };
+
+  handleClick = e => {
+    console.log("e: ", e.currentTarget.id);
+    const date = e.currentTarget.id.slice(0, 10);
+    console.log("date: ", date);
+    const run = e.currentTarget.id.slice(-4);
+    console.log("run: ", run);
+    this.props.saveRuns(date, run);
+
+    // console.log(this.radioRef.current);
   };
 
   render() {
     // const day = this.props.info;
 
-    const { date, start, end, total, breaks, pay, week } = this.props.info;
+    const { date, start, end, breaks, pay, run } = this.props.info;
 
     // console.log("day: ", day);
     return (
       <Container className={this.props.checkToday}>
-        {/* {Object.keys(day).map(d => {
-          return (
-            <div className={d} key={d}>
-              <label>{d}</label> <span>{day[d]}</span>
-            </div>
-          );
-        })} */}
         <button onClick={this.delCard}>
           <span role="img" aria-label="cross">
             ❌
@@ -102,6 +106,44 @@ export class Card extends Component {
         <div className="end">
           <label>End</label>
           <span className="digi">{end}</span>
+        </div>
+        <div className="runs" ref={this.radioRef}>
+          <div>
+            <label htmlFor="run1">
+              <input
+                type="radio"
+                name={`${date}-run`}
+                id={`${date}-run1`}
+                onChange={this.handleClick}
+                checked={run === `run1`}
+              />
+              Run 1
+            </label>
+          </div>
+          <div>
+            <label htmlFor="run2">
+              <input
+                type="radio"
+                name={`${date}-run`}
+                id={`${date}-run2`}
+                onChange={this.handleClick}
+                checked={run === `run2`}
+              />
+              Run 2
+            </label>
+          </div>
+          <div>
+            <label htmlFor="run3">
+              <input
+                type="radio"
+                name={`${date}-run`}
+                id={`${date}-run3`}
+                onChange={this.handleClick}
+                checked={run === `run3`}
+              />
+              Run 3
+            </label>
+          </div>
         </div>
         <div className="etc">
           <span>

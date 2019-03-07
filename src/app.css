@@ -19,8 +19,8 @@
 
   padding: 0 0.5rem;
 }
-cd .content .today {
-  background-color: lightcyan;
+.content .today {
+  background-color: lightseagreen;
 }
 
 .summaryCard {

@@ -65,6 +65,7 @@ export default class App extends Component {
   getText = e => {
     e.preventDefault();
     const textObj = { ...this.textRef.current.getText() };
+
     const newState = { ...this.state.scheduleObj, ...textObj };
 
     this.setState({
@@ -74,38 +75,28 @@ export default class App extends Component {
   };
 
   toggleNextSib = e => {
-    // const cards = document.querySelector(".content");
     const toggleTarget = e.currentTarget.nextSibling;
-    // console.log("e.currentTarget: ", e.currentTarget.nextSibling);
-
-    // const display = cards.style.display;
-
-    // display === "none"
-    //   ? (cards.style.display = "grid")
-    //   : (cards.style.display = "none");
-
-    // const content = this.nextElementSibling;
-
-    // const height = cards.style.maxHeight;
-
-    // height === ""
-    //   ? (cards.style.maxHeight = `${cards.scrollHeight}px`)
-    //   : //  (cards.style.maxHeight = `500px`)
-    //     (cards.style.maxHeight = "");
 
     const height = toggleTarget.style.maxHeight;
 
     height === ""
       ? (toggleTarget.style.maxHeight = `${toggleTarget.scrollHeight}px`)
-      : //  (toggleTarget.style.maxHeight = `500px`)
-        (toggleTarget.style.maxHeight = "");
+      : (toggleTarget.style.maxHeight = "");
+  };
+
+  saveRuns = (date, run) => {
+    const newObj = { [date]: { ...this.state.scheduleObj[date], run: run } };
+    const newState = { ...this.state.scheduleObj, ...newObj };
+
+    this.setState({
+      scheduleObj: { ...newState }
+    });
   };
 
   render() {
     const { scheduleObj } = this.state;
 
     const today = moment().format("YYYY-MM-DD");
-    // console.log("today: ", today);
 
     return (
       <div>
@@ -137,12 +128,12 @@ export default class App extends Component {
               return (
                 <Card
                   delCard={this.delCard}
+                  saveRuns={this.saveRuns}
                   key={item}
                   id={item}
                   info={scheduleObj[item]}
                   // today={moment().format("YYYY-MM-DD")}
                   checkToday={item === today ? "today" : ""}
-                  // className="today"
                 />
               );
             })}

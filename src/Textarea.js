@@ -14,90 +14,7 @@ export default class Textarea extends Component {
   componentDidMount = () => {
     // const text = this.textRef.current.value;
   };
-  insertText = () => {
-    this.textRef.current.value =
-      "User schedule for 7 Jan 2019 through to 13 Jan 2019 is shown below\n" +
-      "\n" +
-      "		Mon 7 Jan \n" +
-      "		-----------\n" +
-      "\n" +
-      "						 Start: 07:30\n" +
-      "\n" +
-      "							 End: 17:00\n" +
-      "\n" +
-      "						 Total: 09:30\n" +
-      "\n" +
-      "						Breaks: 01:00\n" +
-      "\n" +
-      "							 Pay: 08:30\n" +
-      "\n" +
-      "							Role: Distribution Centre (SWMP)AdminDriver DC\n" +
-      "\n" +
-      "		Tue 8 Jan \n" +
-      "		-----------\n" +
-      "\n" +
-      "						 Start: 08:30\n" +
-      "\n" +
-      "							 End: 17:30\n" +
-      "\n" +
-      "						 Total: 09:00\n" +
-      "\n" +
-      "						Breaks: 01:00\n" +
-      "\n" +
-      "							 Pay: 08:00\n" +
-      "\n" +
-      "							Role: Distribution Centre (SWMP)AdminDriver DC\n" +
-      "\n" +
-      "		Wed 9 Jan \n" +
-      "		-----------\n" +
-      "\n" +
-      "						 Start: 08:30\n" +
-      "\n" +
-      "							 End: 17:00\n" +
-      "\n" +
-      "						 Total: 08:30\n" +
-      "\n" +
-      "						Breaks: 01:00\n" +
-      "\n" +
-      "							 Pay: 07:30\n" +
-      "\n" +
-      "							Role: Distribution Centre (SWMP)AdminDriver DC\n" +
-      "\n" +
-      "		Thu 10 Jan \n" +
-      "		-----------\n" +
-      "\n" +
-      "						 Start: 08:30\n" +
-      "\n" +
-      "							 End: 12:00\n" +
-      "\n" +
-      "						 Total: 03:30\n" +
-      "\n" +
-      "						Breaks: 00:00\n" +
-      "\n" +
-      "							 Pay: 03:30\n" +
-      "\n" +
-      "							Role: Distribution Centre (SWMP)AdminDriver DC\n" +
-      "\n" +
-      "		Fri 11 Jan \n" +
-      "		-----------\n" +
-      "\n" +
-      "						 Start: 08:30\n" +
-      "\n" +
-      "							 End: 17:00\n" +
-      "\n" +
-      "						 Total: 08:30\n" +
-      "\n" +
-      "						Breaks: 01:00\n" +
-      "\n" +
-      "							 Pay: 07:30\n" +
-      "\n" +
-      "							Role: Distribution Centre (SWMP)AdminDriver DC\n" +
-      "\n" +
-      "		Rostered hours are flexible and can change without notice depending on the needs of the business.   Please note that the break times shown above are indicative only.  You will need to confirm your break time with the manager/acting manager on the day.   \n" +
-      "\n" +
-      "\n" +
-      "		DoNotReply@riteq.com.au";
-  };
+
   getText = () => {
     const text = this.textRef.current.value;
 
@@ -106,6 +23,7 @@ export default class Textarea extends Component {
       .split("\n")
       .map(item => item.trim())
       .filter(item => item !== "");
+    console.log("arr: ", arr);
     const result = {};
 
     const timeReg = /[A-Za-z]+:\s\d+:\d+/i;
@@ -116,6 +34,7 @@ export default class Textarea extends Component {
         const temp = item.split(": ");
         return [temp[0], temp[1]];
       });
+    console.log("times: ", times);
 
     const dates = arr
       .filter(item => dateReg.test(item))
@@ -123,6 +42,7 @@ export default class Textarea extends Component {
 
     // const weekNum = moment(dates[1], "YYYY-MM-DD").format("W");
     dates.shift();
+    console.log("dates: ", dates);
 
     for (let i = 0, j = 0; i < times.length; i += 5, j++) {
       result[dates[j]] = {
@@ -136,6 +56,7 @@ export default class Textarea extends Component {
       };
     }
 
+    console.log("result: ", result);
     return result;
   };
 

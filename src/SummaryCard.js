@@ -25,8 +25,8 @@ export class SummaryCard extends Component {
     const obj = this.props.info;
     const weeks = uniq(Object.keys(obj).map(key => obj[key].week));
     const hours = Object.keys(obj).map(key => obj[key].total);
-    console.log("hours: ", hours);
-    // console.log("this.calHours(weeks): ", this.calHours(weeks));
+
+    //
 
     return (
       <React.Fragment>
