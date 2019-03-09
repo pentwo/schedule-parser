@@ -85,11 +85,11 @@ export class Card extends Component {
   render() {
     // const day = this.props.info;
 
-    const { date, start, end, breaks, pay, run } = this.props.info;
+    const { date, start, end, breaks, pay, run, passed } = this.props.info;
 
     // console.log("day: ", day);
     return (
-      <Container className={this.props.checkToday}>
+      <Container className={[this.props.checkToday, this.props.passed]}>
         <button onClick={this.delCard}>
           <span role="img" aria-label="cross">
             ❌
@@ -100,7 +100,7 @@ export class Card extends Component {
           <label>Start </label>
           <span className="digi">{start}</span>
         </div>
-        <span role="img" aria-label="arrow-down">
+        <span className="arrow-down" role="img" aria-label="arrow-down">
           ⬇️
         </span>
         <div className="end">
@@ -146,9 +146,8 @@ export class Card extends Component {
           </div>
         </div>
         <div className="etc">
-          <span>
-            Breaks: {breaks} Hours: {pay}
-          </span>
+          <span className="etc--breaks">Breaks: {breaks}</span>
+          <span className="etc--hours">Hours: {pay}</span>
         </div>
       </Container>
     );

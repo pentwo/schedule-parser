@@ -133,6 +133,7 @@ export default class App extends Component {
                   id={item}
                   info={scheduleObj[item]}
                   // today={moment().format("YYYY-MM-DD")}
+                  passed={moment().format("YYYY-MM-DD") > item ? true : false}
                   checkToday={item === today ? "today" : ""}
                 />
               );

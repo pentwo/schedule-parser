@@ -26,3 +26,35 @@ body {
 #root {
   width: 95vw;
 }
+
+.true {
+}
+.true > .cardTitle {
+  /* margin-bottom: 0.5rem; */
+  text-align: center;
+  grid-column: span 2;
+}
+.true > .date,
+.true > .start,
+.true > .end,
+.true > .total,
+.true > .breaks,
+.true > .pay,
+.true > .runs,
+.true > .week,
+.true > .arrow-down {
+  display: none;
+}
+
+.true > .etc {
+  font-size: 0.8rem;
+  grid-column: span 2;
+  text-align: center;
+}
+
+.true > .etc > .etc--breaks {
+  display: none;
+}
+.true > .etc > .etc--hours {
+  font-size: 1rem;
+}
