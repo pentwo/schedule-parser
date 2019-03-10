@@ -4,10 +4,11 @@ import styled from "styled-components";
 import moment from "moment";
 
 import Textarea from "./Textarea";
-import Card from "./Card";
+import Card, { SimpleCard } from "./Card";
 import SummaryCard from "./SummaryCard";
 
 import "./app.css";
+// import { SimpleCard } from "./Card";
 
 const Button = styled.button`
   font-size: 1em;
@@ -116,27 +117,38 @@ export default class App extends Component {
 
         {/* Cards */}
         <div className="cards">
-          <h2 onClick={this.toggleNextSib}>
-            Schedule Cards
-            {/* <span>
-              <button onClick={this.toggleCards}>+</button>
-            </span> */}
-          </h2>
+          <h2 onClick={this.toggleNextSib}>Schedule Cards</h2>
 
           <div className="content">
             {Object.keys(scheduleObj).map(item => {
-              return (
-                <Card
-                  delCard={this.delCard}
-                  saveRuns={this.saveRuns}
-                  key={item}
-                  id={item}
-                  info={scheduleObj[item]}
-                  // today={moment().format("YYYY-MM-DD")}
-                  passed={moment().format("YYYY-MM-DD") > item ? true : false}
-                  checkToday={item === today ? "today" : ""}
-                />
-              );
+              if (moment().format("YYYY-MM-DD") > item) {
+                return (
+                  <SimpleCard
+                    delCard={this.delCard}
+                    saveRuns={this.saveRuns}
+                    key={item}
+                    id={item}
+                    info={scheduleObj[item]}
+                    passed={moment().format("YYYY-MM-DD") > item ? true : false}
+                    checkToday={item === today ? "today" : ""}
+                  />
+                );
+              } else {
+                return (
+                  <Card
+                    delCard={this.delCard}
+                    saveRuns={this.saveRuns}
+                    key={item}
+                    id={item}
+                    info={scheduleObj[item]}
+                    // today={moment().format("YYYY-MM-DD")}
+                    passed={
+                      moment().format("YYYY-MM-DD") > item ? "passed" : ""
+                    }
+                    checkToday={item === today ? "today" : ""}
+                  />
+                );
+              }
             })}
           </div>
         </div>
