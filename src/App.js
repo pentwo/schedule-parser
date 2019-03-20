@@ -85,8 +85,8 @@ export default class App extends Component {
       : (toggleTarget.style.maxHeight = "");
   };
 
-  saveRuns = (date, run) => {
-    const newObj = { [date]: { ...this.state.scheduleObj[date], run: run } };
+  saveJobs = (date, text) => {
+    const newObj = { [date]: { ...this.state.scheduleObj[date], job: text } };
     const newState = { ...this.state.scheduleObj, ...newObj };
 
     this.setState({
@@ -125,7 +125,6 @@ export default class App extends Component {
                 return (
                   <SimpleCard
                     delCard={this.delCard}
-                    saveRuns={this.saveRuns}
                     key={item}
                     id={item}
                     info={scheduleObj[item]}
@@ -137,7 +136,7 @@ export default class App extends Component {
                 return (
                   <Card
                     delCard={this.delCard}
-                    saveRuns={this.saveRuns}
+                    saveJobs={this.saveJobs}
                     key={item}
                     id={item}
                     info={scheduleObj[item]}
