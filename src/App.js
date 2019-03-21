@@ -92,6 +92,7 @@ export default class App extends Component {
     this.setState({
       scheduleObj: { ...newState }
     });
+    this.saveLocal(newState);
   };
 
   render() {

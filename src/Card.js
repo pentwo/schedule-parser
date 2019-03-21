@@ -104,7 +104,7 @@ export class Card extends Component {
   render() {
     // const day = this.props.info;
 
-    const { date, start, end, breaks, pay, run } = this.props.info;
+    const { date, start, end, breaks, pay, job } = this.props.info;
 
     // console.log("day: ", day);
     return (
@@ -134,6 +134,7 @@ export class Card extends Component {
             onChange={this.handleChange}
             ref={this.inputRef}
             id={date}
+            value={job}
           />
           {/* <div>
             <label htmlFor="run1">
