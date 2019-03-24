@@ -12,7 +12,6 @@ const CardContainer = styled.div`
   background-color: #eee;
 
   &:hover {
-    /* background: lightgray; */
     box-shadow: 3px 3px 5px #111;
   }
 
@@ -60,6 +59,7 @@ const CardContainer = styled.div`
 
   .digi {
     font-size: 1rem;
+    font-weight: bold;
   }
 
   .emoji {
@@ -102,11 +102,8 @@ export class Card extends Component {
   };
 
   render() {
-    // const day = this.props.info;
-
     const { date, start, end, breaks, pay, job } = this.props.info;
 
-    // console.log("day: ", day);
     return (
       <CardContainer className={[this.props.checkToday, this.props.passed]}>
         <button onClick={this.delCard}>
@@ -136,42 +133,6 @@ export class Card extends Component {
             id={date}
             value={job}
           />
-          {/* <div>
-            <label htmlFor="run1">
-              <input
-                type="radio"
-                name={`${date}-run`}
-                id={`${date}-run1`}
-                onChange={this.handleClick}
-                checked={run === `run1`}
-              />
-              Run 1
-            </label>
-          </div>
-          <div>
-            <label htmlFor="run2">
-              <input
-                type="radio"
-                name={`${date}-run`}
-                id={`${date}-run2`}
-                onChange={this.handleClick}
-                checked={run === `run2`}
-              />
-              Run 2
-            </label>
-          </div>
-          <div>
-            <label htmlFor="run3">
-              <input
-                type="radio"
-                name={`${date}-run`}
-                id={`${date}-run3`}
-                onChange={this.handleClick}
-                checked={run === `run3`}
-              />
-              Run 3
-            </label>
-          </div> */}
         </div>
         <div className="etc">
           <span className="etc--breaks">Breaks: {breaks}</span>
@@ -193,7 +154,6 @@ const SimpleCardContainer = styled.div`
   background-color: #eee;
 
   &:hover {
-    /* background: lightgray; */
     box-shadow: 3px 3px 5px #111;
   }
 

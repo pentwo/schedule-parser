@@ -6,9 +6,9 @@ import moment from "moment";
 import Textarea from "./Textarea";
 import Card, { SimpleCard } from "./Card";
 import SummaryCard from "./SummaryCard";
+// import User from "./User";
 
 import "./app.css";
-// import { SimpleCard } from "./Card";
 
 const Button = styled.button`
   font-size: 1em;
@@ -106,6 +106,7 @@ export default class App extends Component {
         <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
           Schedule Parser
         </h1>
+        {/* <User /> */}
 
         <div className="parser">
           <h2 onClick={this.toggleNextSib}>Schedule Parser</h2>
