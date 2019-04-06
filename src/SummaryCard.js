@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import Chart from "chart.js";
 import uniq from "lodash/uniq";
 
@@ -25,14 +26,14 @@ class SummaryCard extends Component {
   }
 
   drawChart = () => {
-    console.log("this: ", this);
+    // console.log("this: ", this);
 
     const obj = this.props.info;
-    console.log("obj: ", obj);
+    // console.log("obj: ", obj);
     const weeks = uniq(Object.keys(obj).map(key => obj[key].week));
-    console.log("weeks: ", weeks);
+    // console.log("weeks: ", weeks);
     const hours = weeks.map(week => this.calHours(week));
-    console.log("hours: ", hours);
+    // console.log("hours: ", hours);
     const displayWeeks = weeks.map(week => `Week ${week}`);
     const chartData = {
       labels: displayWeeks,
@@ -51,8 +52,8 @@ class SummaryCard extends Component {
         }
       ]
     };
-    console.log("this.refs.: ", this.refs);
-    console.log("this.refs.canvas: ", this.refs.canvas);
+    // console.log("this.refs.: ", this.refs);
+    // console.log("this.refs.canvas: ", this.refs.canvas);
     const ctx = this.refs.canvas.getContext("2d");
     new Chart(ctx, {
       type: "line",

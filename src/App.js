@@ -4,8 +4,9 @@ import styled from "styled-components";
 import moment from "moment";
 
 import Textarea from "./Textarea";
-import Card, { SimpleCard } from "./Card";
+import Card from "./Card";
 import SummaryCard from "./SummaryCard";
+import MonthlyView from "./MonthlyView";
 // import User from "./User";
 
 import "./app.css";
@@ -99,6 +100,29 @@ export default class App extends Component {
     const { scheduleObj } = this.state;
 
     const today = moment().format("YYYY-MM-DD");
+    const monthArray = Object.keys(scheduleObj).reduce((pre, cur, index) => {
+      const currentMonth = moment(cur).month();
+
+      if (pre[currentMonth] === undefined) {
+        //   pre.push([currentMonth]);
+        //   console.log("pre: ", pre);
+        //   // pre[currentMonth].push(cur);
+        // } else {
+        //   // pre[currentMonth].push(cur);
+        pre[currentMonth] = [cur];
+      } else {
+        pre[currentMonth].push(cur);
+      }
+      return pre;
+    }, {});
+
+    // const pastSchedule = Object.keys(scheduleObj).filter(item => {
+    //   return today > item;
+    // });
+    const futureSchedule = Object.keys(scheduleObj).filter(item => {
+      return today < item;
+    });
+    // console.log("futureSchedule: ", futureSchedule);
 
     return (
       <div>
@@ -110,7 +134,6 @@ export default class App extends Component {
 
         <div className="parser">
           <h2 onClick={this.toggleNextSib}>Schedule Parser</h2>
-          {/* <Button onClick={this.insertText}>Insert Text</Button> */}
           <div className="form">
             <Textarea ref={this.textRef} />
             <Button onClick={this.getText}>Run</Button>
@@ -122,7 +145,29 @@ export default class App extends Component {
           <h2 onClick={this.toggleNextSib}>Schedule Cards</h2>
 
           <div className="content">
-            {Object.keys(scheduleObj).map(item => {
+            {
+              <MonthlyView
+                delCard={this.delCard}
+                monthly={monthArray}
+                info={scheduleObj}
+                toggleNextSib={this.toggleNextSib}
+              />
+            }
+            {futureSchedule.map(item => {
+              return (
+                <Card
+                  delCard={this.delCard}
+                  saveJobs={this.saveJobs}
+                  key={item}
+                  id={item}
+                  info={scheduleObj[item]}
+                  // today={moment().format("YYYY-MM-DD")}
+                  passed={today > item ? "passed" : ""}
+                  checkToday={item === today ? "today" : ""}
+                />
+              );
+            })}
+            {/* {Object.keys(scheduleObj).map(item => {
               if (moment().format("YYYY-MM-DD") > item) {
                 return (
                   <SimpleCard
@@ -150,7 +195,7 @@ export default class App extends Component {
                   />
                 );
               }
-            })}
+            })} */}
           </div>
         </div>
 
