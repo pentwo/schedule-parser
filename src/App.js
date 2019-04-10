@@ -81,9 +81,16 @@ export default class App extends Component {
 
     const height = toggleTarget.style.maxHeight;
 
-    height === ""
-      ? (toggleTarget.style.maxHeight = `${toggleTarget.scrollHeight}px`)
-      : (toggleTarget.style.maxHeight = "");
+    if (height === "") {
+      toggleTarget.style.maxHeight = `calc(${
+        toggleTarget.scrollHeight
+      }px + 10px)`;
+
+      toggleTarget.style.padding = "0 0 0.5rem 0";
+    } else {
+      toggleTarget.style.padding = "";
+      toggleTarget.style.maxHeight = "";
+    }
   };
 
   saveJobs = (date, text) => {
@@ -120,7 +127,7 @@ export default class App extends Component {
     //   return today > item;
     // });
     const futureSchedule = Object.keys(scheduleObj).filter(item => {
-      return today < item;
+      return today <= item;
     });
     // console.log("futureSchedule: ", futureSchedule);
 

@@ -17,7 +17,7 @@
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
 
-  padding: 0 0.5rem;
+  /* padding: 0.5rem; */
 }
 .content .today {
   background-color: lightgray;
@@ -37,4 +37,8 @@
 
 .summaryCard canvas {
   grid-column: 1/-1;
+}
+
+.cards {
+  /* background-color: #111111; */
 }
