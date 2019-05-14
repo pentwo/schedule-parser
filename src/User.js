@@ -4,6 +4,7 @@ function User() {
   return (
     <div>
       <label For="user">Please Select a User</label>
+      <br />
       <select id="userSelection">
         <option value="steven" data-user="steven">
           STEVEN

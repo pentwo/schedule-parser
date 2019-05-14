@@ -8,6 +8,7 @@ import Card from "./Card";
 import SummaryCard from "./SummaryCard";
 import MonthlyView from "./MonthlyView";
 // import User from "./User";
+import base from "./base";
 
 import "./app.css";
 
@@ -25,6 +26,8 @@ const Button = styled.button`
 //   gap: 1rem;
 // `;
 
+const USER = "steven";
+
 export default class App extends Component {
   textRef = createRef();
 
@@ -34,6 +37,11 @@ export default class App extends Component {
 
   componentDidMount() {
     const localData = this.getLocal();
+
+    this.ref = base.syncState(`/users/${USER}/scheduleObj`, {
+      context: this,
+      state: `scheduleObj`
+    });
 
     if (localData) {
       this.setState({ scheduleObj: { ...localData } });
@@ -48,6 +56,7 @@ export default class App extends Component {
 
   getLocal = () => {
     const data = localStorage.getItem("Week");
+
     return data ? JSON.parse(data) : [];
   };
 
@@ -78,7 +87,6 @@ export default class App extends Component {
 
   toggleNextSib = e => {
     const toggleTarget = e.currentTarget.nextSibling;
-
     const height = toggleTarget.style.maxHeight;
 
     if (height === "") {
@@ -129,7 +137,6 @@ export default class App extends Component {
     const futureSchedule = Object.keys(scheduleObj).filter(item => {
       return today <= item;
     });
-    // console.log("futureSchedule: ", futureSchedule);
 
     return (
       <div>
