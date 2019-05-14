@@ -28,6 +28,8 @@ const Button = styled.button`
 
 const USER = "steven";
 
+// TODO: add switch users function
+
 export default class App extends Component {
   textRef = createRef();
 
@@ -36,29 +38,29 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const localData = this.getLocal();
+    // const localData = this.getLocal();
 
     this.ref = base.syncState(`/users/${USER}/scheduleObj`, {
       context: this,
       state: `scheduleObj`
     });
 
-    if (localData) {
-      this.setState({ scheduleObj: { ...localData } });
-    }
+    // if (localData) {
+    //   this.setState({ scheduleObj: { ...localData } });
+    // }
   }
 
-  saveLocal = obj => {
-    const data = JSON.stringify(obj);
+  // saveLocal = obj => {
+  //   const data = JSON.stringify(obj);
 
-    localStorage.setItem("Week", data);
-  };
+  //   localStorage.setItem("Week", data);
+  // };
 
-  getLocal = () => {
-    const data = localStorage.getItem("Week");
+  // getLocal = () => {
+  //   const data = localStorage.getItem("Week");
 
-    return data ? JSON.parse(data) : [];
-  };
+  //   return data ? JSON.parse(data) : [];
+  // };
 
   delCard = num => {
     const newObj = omit(this.state.scheduleObj, num);
