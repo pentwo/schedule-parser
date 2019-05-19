@@ -3,13 +3,26 @@ import styled from "styled-components";
 
 // import moment from "moment";
 
+// import { Card: CardMaterial } from "react-materialize";
+
 const CardContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.5rem;
-  border: 2px solid #111;
+  /* border: 2px solid #111;
   border-radius: 10px;
-  background-color: #eee;
+  background-color: #eee; */
+  /*  */
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.14) 0 2px 2px 0,
+    rgba(0, 0, 0, 0.12) 0 3px 1px -2px, rgba(0, 0, 0, 0.2) 0 1px 5px 0;
+  margin: 0.5rem 0 1rem;
+  position: relative;
+  transition-delay: 0s, 0s;
+  transition-duration: 0.25s, 0.25s;
+  transition-property: box-shadow, box-shadow;
+  transition-timing-function: ease, ease;
 
   &:hover {
     box-shadow: 3px 3px 5px #111;
@@ -35,6 +48,11 @@ const CardContainer = styled.div`
     margin-bottom: 0.5rem;
     text-align: center;
     grid-column: span 3;
+    display: block;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 32px;
+    margin-bottom: 8px;
   }
   .date,
   .start,
@@ -149,9 +167,22 @@ const SimpleCardContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
-  border: 2px solid #111;
+  /* border: 2px solid #111;
   border-radius: 10px;
-  background-color: #eee;
+  background-color: #eee; */
+
+  /*  */
+
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.14) 0 2px 2px 0,
+    rgba(0, 0, 0, 0.12) 0 3px 1px -2px, rgba(0, 0, 0, 0.2) 0 1px 5px 0;
+  margin: 0.5rem 0 1rem;
+  position: relative;
+  transition-delay: 0s, 0s;
+  transition-duration: 0.25s, 0.25s;
+  transition-property: box-shadow, box-shadow;
+  transition-timing-function: ease, ease;
 
   &:hover {
     box-shadow: 3px 3px 5px #111;
