@@ -65,7 +65,7 @@ export default class App extends Component {
   delCard = num => {
     const newObj = omit(this.state.scheduleObj, num);
 
-    this.saveLocal(newObj);
+    // this.saveLocal(newObj);
     this.setState({
       scheduleObj: newObj
     });
@@ -84,7 +84,7 @@ export default class App extends Component {
     this.setState({
       scheduleObj: newState
     });
-    this.saveLocal(newState);
+    // this.saveLocal(newState);
   };
 
   toggleNextSib = e => {
@@ -110,7 +110,7 @@ export default class App extends Component {
     this.setState({
       scheduleObj: { ...newState }
     });
-    this.saveLocal(newState);
+    // this.saveLocal(newState);
   };
 
   render() {
