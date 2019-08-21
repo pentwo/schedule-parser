@@ -8,4 +8,9 @@ Schedule Parser Link: [https://sushisushi-schedule-parser.netlify.com/](https://
 I work in Sushisushi as a Stock man. Every week I recieve next week's job schedule in plain text.
 
 I wrote this little app that can transform plain text into a Card-like UI for me to at a glance to see which shift I work.
+## Example
 
+The parser turns this
+![schedule_text](https://i.imgur.com/G2sjmxH.png)
+
+into this
