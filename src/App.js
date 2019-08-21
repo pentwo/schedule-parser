@@ -1,16 +1,16 @@
-import React, { Component, createRef } from "react";
-import omit from "lodash/omit";
-import styled from "styled-components";
-import moment from "moment";
+import React, { Component, createRef } from 'react';
+import omit from 'lodash/omit';
+import styled from 'styled-components';
+import moment from 'moment';
 
-import Textarea from "./Textarea";
-import Card from "./Card";
-import SummaryCard from "./SummaryCard";
-import MonthlyView from "./MonthlyView";
+import Textarea from './Textarea';
+import Card from './Card';
+import SummaryCard from './SummaryCard';
+import MonthlyView from './MonthlyView';
 // import User from "./User";
-import base from "./base";
+import base from './base';
 
-import "./app.css";
+import './app.css';
 
 const Button = styled.button`
   font-size: 1em;
@@ -18,15 +18,8 @@ const Button = styled.button`
   padding: 0.25em 1em;
   border-radius: 5px;
 `;
-// const Cards = styled.div`
-//   /* padding: 1rem; */
 
-//   display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-//   gap: 1rem;
-// `;
-
-const USER = "steven";
+const USER = 'steven';
 
 // TODO: add switch users function
 
@@ -34,7 +27,7 @@ export default class App extends Component {
   textRef = createRef();
 
   state = {
-    scheduleObj: {}
+    scheduleObj: {},
   };
 
   componentDidMount() {
@@ -42,7 +35,7 @@ export default class App extends Component {
 
     this.ref = base.syncState(`/users/${USER}/scheduleObj`, {
       context: this,
-      state: `scheduleObj`
+      state: `scheduleObj`,
     });
 
     // if (localData) {
@@ -67,7 +60,7 @@ export default class App extends Component {
 
     // this.saveLocal(newObj);
     this.setState({
-      scheduleObj: newObj
+      scheduleObj: newObj,
     });
   };
 
@@ -82,24 +75,30 @@ export default class App extends Component {
     const newState = { ...this.state.scheduleObj, ...textObj };
 
     this.setState({
-      scheduleObj: newState
+      scheduleObj: newState,
     });
     // this.saveLocal(newState);
+  };
+
+  getDay = e => {
+    e.preventDefault();
+
+    this.textRef.current.getDay();
   };
 
   toggleNextSib = e => {
     const toggleTarget = e.currentTarget.nextSibling;
     const height = toggleTarget.style.maxHeight;
 
-    if (height === "") {
+    if (height === '') {
       toggleTarget.style.maxHeight = `calc(${
         toggleTarget.scrollHeight
       }px + 10px)`;
 
-      toggleTarget.style.padding = "0 0 0.5rem 0";
+      toggleTarget.style.padding = '0 0 0.5rem 0';
     } else {
-      toggleTarget.style.padding = "";
-      toggleTarget.style.maxHeight = "";
+      toggleTarget.style.padding = '';
+      toggleTarget.style.maxHeight = '';
     }
   };
 
@@ -108,24 +107,18 @@ export default class App extends Component {
     const newState = { ...this.state.scheduleObj, ...newObj };
 
     this.setState({
-      scheduleObj: { ...newState }
+      scheduleObj: { ...newState },
     });
-    // this.saveLocal(newState);
   };
 
   render() {
     const { scheduleObj } = this.state;
 
-    const today = moment().format("YYYY-MM-DD");
+    const today = moment().format('YYYY-MM-DD');
     const monthArray = Object.keys(scheduleObj).reduce((pre, cur, index) => {
       const currentMonth = moment(cur).month();
 
       if (pre[currentMonth] === undefined) {
-        //   pre.push([currentMonth]);
-        //   console.log("pre: ", pre);
-        //   // pre[currentMonth].push(cur);
-        // } else {
-        //   // pre[currentMonth].push(cur);
         pre[currentMonth] = [cur];
       } else {
         pre[currentMonth].push(cur);
@@ -133,9 +126,6 @@ export default class App extends Component {
       return pre;
     }, {});
 
-    // const pastSchedule = Object.keys(scheduleObj).filter(item => {
-    //   return today > item;
-    // });
     const futureSchedule = Object.keys(scheduleObj).filter(item => {
       return today <= item;
     });
@@ -143,16 +133,16 @@ export default class App extends Component {
     return (
       <div>
         {/* Header */}
-        <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
+        <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>
           Schedule Parser
         </h1>
-        {/* <User /> */}
 
+        {/* <User /> */}
         <div className="parser">
           <h2 onClick={this.toggleNextSib}>Schedule Parser</h2>
           <div className="form">
             <Textarea ref={this.textRef} />
-            <Button onClick={this.getText}>Run</Button>
+            <Button onClick={this.getDay}>Run</Button>
           </div>
         </div>
 
@@ -178,40 +168,11 @@ export default class App extends Component {
                   id={item}
                   info={scheduleObj[item]}
                   // today={moment().format("YYYY-MM-DD")}
-                  passed={today > item ? "passed" : ""}
-                  checkToday={item === today ? "today" : ""}
+                  passed={today > item ? 'passed' : ''}
+                  checkToday={item === today ? 'today' : ''}
                 />
               );
             })}
-            {/* {Object.keys(scheduleObj).map(item => {
-              if (moment().format("YYYY-MM-DD") > item) {
-                return (
-                  <SimpleCard
-                    delCard={this.delCard}
-                    key={item}
-                    id={item}
-                    info={scheduleObj[item]}
-                    passed={moment().format("YYYY-MM-DD") > item ? true : false}
-                    checkToday={item === today ? "today" : ""}
-                  />
-                );
-              } else {
-                return (
-                  <Card
-                    delCard={this.delCard}
-                    saveJobs={this.saveJobs}
-                    key={item}
-                    id={item}
-                    info={scheduleObj[item]}
-                    // today={moment().format("YYYY-MM-DD")}
-                    passed={
-                      moment().format("YYYY-MM-DD") > item ? "passed" : ""
-                    }
-                    checkToday={item === today ? "today" : ""}
-                  />
-                );
-              }
-            })} */}
           </div>
         </div>
 

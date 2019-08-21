@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { SimpleCard } from "./Card";
+import { Card } from './Card';
 
 const Layout = styled.div`
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
+  /* max-height: 0; */
+  /* overflow: hidden; */
+  /* transition: max-height 0.3s ease-in-out; */
 
   grid-column: 1/-1;
   display: grid;
@@ -21,33 +21,19 @@ const Layout = styled.div`
 `;
 
 export const mL = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
-// const mS = [
-//   "Jan",
-//   "Feb",
-//   "Mar",
-//   "Apr",
-//   "May",
-//   "June",
-//   "July",
-//   "Aug",
-//   "Sept",
-//   "Oct",
-//   "Nov",
-//   "Dec"
-// ];
 
 export default function MonthlyView(props) {
   const monthly = props.monthly;
@@ -57,16 +43,11 @@ export default function MonthlyView(props) {
   return Object.keys(monthly).map(m => {
     return (
       <React.Fragment key={m}>
-        <h2 onClick={props.toggleNextSib}>{mL[m]}</h2>
+        <h2>{mL[m]}</h2>
         <Layout className="">
           {monthly[m].map(day => {
             return (
-              <SimpleCard
-                delCard={delCard}
-                key={day}
-                id={day}
-                info={obj[day]}
-              />
+              <Card delCard={delCard} key={day} id={day} info={obj[day]} />
             );
           })}
           {/* <Month key={mS[m]} info={obj} month={monthly[m]} /> */}
